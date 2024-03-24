@@ -1,0 +1,1 @@
+To navigate through this project, feel free to start by opening up the 'grand-tour-architects.html' page, and just start clicking through!

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+.architect-name{
+  color:#ffffff;
+  font-size: 30px;
+}
+
+.portrait {
+  height: 60%;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  border-color:#ffffff;
+  border-style: solid;
+  width: 33%;
+  padding: 10px;
+  height: 80vh; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+}
+</style>
+</head>
+<body>
+
+  <h2>Mapping Grand Tour Architectural Influneces on British Architecture</h2>
+<h3> This project, through the case studies of three British architects that embarked on the Grand Tour, seeks to map different Grand Tour destinations, with specific British buildings, many of whom still stand today. Click on each architect's name to see more!</h3>
+<div class="row">
+  <div class="column" style="background-color:#242a3a;">
+    <br></br>
+    <img class = 'portrait' src="william-kent.jpeg"/>
+    <br></br>
+    <a class = 'architect-name' href = "williamkent.html">William Kent (1685-1748)</a>
+    
+  </div>
+  <div class="column" style="background-color:#242a3b;">
+    <br></br>
+    <img class = 'portrait' src="robert-adam.jpeg"/>
+    <br></br>
+    <a class = 'architect-name' href = "adam.html">Robert Adam (1728-1792)</a>
+    
+  </div>
+  <div class="column" style="background-color:#242a3c;">
+    <br></br>
+    <img class = 'portrait' src="soane.jpeg"/>
+    <br></br>
+    <a class = 'architect-name' href = "soane.html">John Soane (1753-1837)</a>
+    
+  </div>
+  <br></br>
+  <p>Created by Connie Hong, for Professor Giovanni Ceserani's ENGLISH115 Class at Stanford University, 2024</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,152 @@
+<html>
+<head>
+  <title>William Kent</title>
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"/>
+  <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+  <style>
+    /*#map{ width: 80vw; height: 100vh; }*/
+
+    * {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that floats next to each other */
+.column-left {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  height: 100vh; /* Should be removed. Only for demonstration */
+}
+
+.column-right {
+  float: left;
+  width: 80%;
+  padding: 10px;
+  height: 100vh; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.architect-name{
+  color:#ffffff;
+  font-size: 30px;
+}
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+}
+
+.portrait {
+  width:100%;
+}
+
+.text{
+  color: #ffffff;
+}
+
+.img-icon {
+  width: 300px;
+}
+.leaflet-layer,
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out,
+.leaflet-control-attribution {
+  filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+}
+
+
+  </style>
+</head>
+<body>
+
+<!--div id="map"></div> -->
+  <div class="row">
+    <div class="column-left" style="background-color:#242a3b;">
+      <h2 class="architect-name">William Kent</h2>
+      <img class = 'portrait' src="william-kent.jpeg"/>
+      <p class = 'text'>Having traveled the Grand Tour during the years of 1709-1760, William Kent's works primarily reflected the desires for Palladian facades by his aristocrat sponsors (i.e. Lord Burlington).</p>
+      <h3 class="text">Legend:</h3>
+      <p class = 'text'>White Stars: Refer to Critical Architectural Sights, both of Kent's works, and his visited locations on the Grand Tour</p>
+      <p class = 'text'>White Dashed Line: Connections of Grand Tour and Kent's Work</p>
+      <p class = 'text'>Grey Dashed Line: Kent's Route</p>
+      <a class = 'text' href = "grand-tour-architects.html">Back Home.</a> 
+    </div>
+    <div class="column-right" id="map" style="background-color:#242a3b;">
+    </div>
+  </div>
+  <script>
+
+  //function add_markers(){}
+  //add_markers()
+  // initialize the map
+  
+  var map = L.map('map').setView([48, 9], 5);
+
+
+  var LeafIcon = L.Icon.extend({
+    options: {
+        //shadowUrl: 'white-star-hi.png',
+        iconSize:     [20, 20],
+        //shadowSize:   [50, 64],
+        //iconAnchor:   [0, 0],
+        //shadowAnchor: [4, 62],
+        popupAnchor:  [0, 0]
+    }
+});
+
+  var starIcon = new LeafIcon({iconUrl: 'white-star-hi.png'})
+  L.icon = function (options) {
+    return new L.Icon(options);
+};
+
+
+  villa_capra_coords = [45.53202063592141, 11.563316889178047];
+  vicenza_basilica_coords = [45.54706832130749, 11.547106434728702];
+  san_giorgio_coords = [45.42853708111204, 12.345754102259296]
+  chiswick_coords = [51.48455163214838, -0.257290502326497865]
+  badminton_coords = [51.544870911543434, -2.2805905974852565]
+  holkam_coords=[52.951249997458476, 0.810319493300728]
+
+  var villa_capra = L.marker(villa_capra_coords, {icon: starIcon}).addTo(map);
+  var vicenza_basilica = L.marker(vicenza_basilica_coords, {icon: starIcon}).addTo(map);
+  var san_giorgio = L.marker(san_giorgio_coords, {icon: starIcon}).addTo(map);
+
+  var chiswick_house = L.marker(chiswick_coords, {icon: starIcon}).addTo(map);
+  var badminton_house = L.marker(badminton_coords, {icon: starIcon}).addTo(map);
+  var holkam_hall = L.marker(holkam_coords, {icon: starIcon}).addTo(map);
+
+  villa_capra.bindPopup("<div> <h1 class = 'building-name'>Villa Capra</h1> <img class = 'img-icon' src='villa-capra.png'/> <p>Example of Personal Villas, for Italian upper-class families, of Italian Countryside designed by Andrea Palladio; 1 hour away from heart of Vicenza.</p> </div>").openPopup();
+  chiswick_house.bindPopup("<div> <h1 class = 'building-name'>Chiswick House (1729)</h1> <img class = 'img-icon' src='chiswick-house.png'/> <h3>Key Features:</h3> <p>Set of Three Venetian Windows; Symmetrical Floor Plan; All trace to Palladian Rotondas.</p> </div>").openPopup();
+  vicenza_basilica.bindPopup("<div> <h1 class = 'building-name'>Vicenza Basilica</h1> <img class = 'img-icon' src='vicenza-basilica.png'/> <p>Palladio's Basilica in Vicenza, featuring the key Venetian windows, and repeating principles of symmetry. Interiors also contain high, arched domes (also found in Chiswick interiors). </p> </div>").openPopup();
+  san_giorgio.bindPopup("<div> <h1 class = 'building-name'>San Giorgio Maggiore</h1> <img class = 'img-icon' src='san-giorgio.png'/> <p>Another Palladio-designed Basilica featuring Venetian Windows, a symmetrical exterior facade.</p> </div>").openPopup();
+  badminton_house.bindPopup("<div><h1>Worcester Lodge, Badminton House</h1><img class = 'img-icon' src='badminton-house.png'/><h3>Key Features: </h3><p> Three-Paneled, Symmetric Combination of Venetian Windows.<h3></div>").openPopup();
+  holkam_hall.bindPopup("<div> <h1 class = 'building-name'>Holkam Hall (1745)</h1> <img class = 'img-icon' src='holkam-hall.png'/> <h3>Key Features:</h3> <p>Strong symmetrical facade, with pillars mimicking that of Palladio's Basilica's, along with high-rounded ceilings in interiors.</p> </div>").openPopup();
+  
+
+  kent_travels = [[51.50722222, -0.1275], [43.55, 10.31666667], [43.70853, 10.4036], [43.77138889, 11.25416667], [41.89305556, 12.48277778], [43.31833333, 11.33138889], [43.77138889, 11.25416667], [44.504822, 11.34517956], [44.28333333, 11.88333333], [44.2225, 12.04083333], [44.4183598, 12.2035294], [44.8381237, 11.619787], [45.43811, 12.31814957], [45.40638889, 11.87777778], [45.54672, 11.5475], [45.1564168, 10.7913751], [44.80147222, 10.328], [41.89305556, 12.48277778], [40.840141, 14.25226021], [41.89305556, 12.48277778], [43.77138889, 11.25416667], [44.504822, 11.34517956], [44.64783, 10.92539], [44.69825, 10.63125], [44.80147222, 10.328], [44.64783, 10.92539], [44.504822, 11.34517956], [41.89305556, 12.48277778], [43.77138889, 11.25416667], [44.40718611, 8.933983333], [51.50853, -0.12574], [44.40718611, 8.933983333], [44.504822, 11.34517956], [43.77138889, 11.25416667], [45.43811, 12.31814957], [43.77138889, 11.25416667], [40.840141, 14.25226021], [41.89305556, 12.48277778], [43.77138889, 11.25416667]]
+  //kent_travel_years = [[1709, 1719], [1709, 1719], [1709, 1719], [1709, 1719], [1709, 1719], [1709, 1719], [1709, 1719], [1709, 1719], [1709, 1719], [1709, 1719], [1709, 1719], [1709, 1719], [1709, 1719], [1709, 1719], [1709, 1719], [1709, 1719], [1709, 1719], [1709, 1719], [1709, 1719], [1709, 1719], [1709, 1719], [1709, 1719], [1709, 1719], [1709, 1719], [1709, 1719], [1709, 1719], [1709, 1719], [1709, 1719], [1709, 1719], [1709, 1719], [1709, 1719], [1758, 1760], [1758, 1760], [1758, 1760], [1758, 1760], [1758, 1760], [1758, 1760], [1758, 1760], [1758, 1760]]
+  
+  grey_style = {color: 'grey', weight: 5, opacity: 0.7, dashArray: '4,12,20,12', lineJoin: 'miter', lineCap: 'square'}
+  white_style = {color: 'white', weight: 5, opacity: 0.7, dashArray: '4,12,20,12', lineJoin: 'miter', lineCap: 'square'}
+  var travel_path = L.polyline(kent_travels, grey_style).addTo(map);
+
+  var chiswick_and_villa = L.polyline([chiswick_coords, villa_capra_coords], white_style).addTo(map);
+  var holkam_vicenza = L.polyline([holkam_coords, vicenza_basilica_coords], white_style).addTo(map);
+
+  // load a tile layer
+  const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		maxZoom: 19,
+    //minZoom: 9,
+		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+	}).addTo(map);
+
+  </script>
+</body>
+</html>

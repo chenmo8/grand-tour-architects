@@ -1,0 +1,156 @@
+<html>
+<head>
+  <title>John Soane</title>
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"/>
+  <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+  <style>
+    /*#map{ width: 80vw; height: 100vh; }*/
+
+    * {
+  box-sizing: border-box;
+}
+
+.img-icon {
+  width: 300px;
+}
+
+/* Create two equal columns that floats next to each other */
+.column-left {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  height: 100vh; /* Should be removed. Only for demonstration */
+}
+
+.column-right {
+  float: left;
+  width: 80%;
+  padding: 10px;
+  height: 100vh; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.architect-name{
+  color:#ffffff;
+  font-size: 30px;
+}
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+}
+
+.portrait {
+  width:90%;
+}
+
+.text{
+  color: #ffffff;
+}
+
+.img-side {
+  height:100px;
+}
+.leaflet-layer,
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out,
+.leaflet-control-attribution {
+  filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+}
+
+
+  </style>
+</head>
+<body>
+
+<!--div id="map"></div> -->
+  <div class="row">
+    <div class="column-left" style="background-color:#242a3b;">
+      <h2 class="architect-name">John Soane</h2>
+      <img class = 'portrait' src="soane.jpeg"/>
+      <p class = 'text'> Coming from humble working class origins, John Soane's hard work earned him sponsorship from the Royal Academy to travel the Grand Tour from 1778 to 1780. He was also one of the first to pioneer the usage of Greek Doric columns in public British buildings, which can be exemplified in his work for the Bank of England, as well as public offices in Whitehall and Westminister.</p>
+    <h3 class="text">Legend:</h3>
+      <p class = 'text'>White Stars: Architectural Points. </p>
+     <p class = 'text'>White Dashed Line: Connections of Grand Tour and Soane's Work.</p>
+      <p class = 'text'>Grey Dashed Line: Soane's Route</p>
+      <a class = 'text' href = "grand-tour-architects.html">Back Home.</a> 
+    </div>
+    <div class="column-right" id="map" style="background-color:#242a3b;">
+    </div>
+  </div>
+  <script>
+
+  //function add_markers(){}
+  //add_markers()
+  // initialize the map
+  
+  var map = L.map('map').setView([48, 9], 5);
+
+
+  var LeafIcon = L.Icon.extend({
+    options: {
+        //shadowUrl: 'white-star-hi.png',
+        iconSize:     [20, 20],
+        //shadowSize:   [50, 64],
+        //iconAnchor:   [0, 0],
+        //shadowAnchor: [4, 62],
+        popupAnchor:  [0, 0]
+    }
+});
+
+  var starIcon = new LeafIcon({iconUrl: 'white-star-hi.png'})
+  L.icon = function (options) {
+    return new L.Icon(options);
+};
+  church_coords = [51.48714669395847, -0.09113877842177938],
+  cheslea_hospital_coords = [51.48766042771813, -0.157590228835134]
+  bank_coords = [51.51406061905052, -0.08801773966106637]
+  
+  vesta_coords = [41.96724362322061, 12.805022757350908]
+  valley_coords = [37.29256695305101, 13.594237538049851]
+  hera_coords = [40.420600064505045, 15.007663006704885]
+
+  var church = L.marker(church_coords, {icon: starIcon}).addTo(map);
+  var hospital = L.marker(cheslea_hospital_coords, {icon: starIcon}).addTo(map);
+  var bank = L.marker(bank_coords, {icon: starIcon}).addTo(map);
+
+  var vesta = L.marker(vesta_coords, {icon: starIcon}).addTo(map);
+  var hera = L.marker(hera_coords, {icon: starIcon}).addTo(map);
+
+  church.bindPopup("<div> <h1 class = 'building-name'>St Peter's Church, Walworth (1825)</h1> <img class = 'img-side' src='church-ext.jpeg'/><img class = 'img-side' src='church-ind.jpeg'/> <p> Interior contains tall, arched windows reimnisicent of Soane's journeys in Vicenza, along with an exterior featuring Greek Doric columns.</p></div>").openPopup();
+  hospital.bindPopup("<div> <h1 class = 'building-name'>Royal Hospital Chelsea (1807)</h1><img class = 'img-icon' src='hospital.jpeg'/><p> Exterior features symmetrical design, and Venetian windows of Palladian style, along with Greek Doric Columns. It now houses retired veterans, and is a symbol of loyalty to the Britains's national identity and government.</p></div>").openPopup();
+  bank.bindPopup("<div> <h1 class = 'building-name'>Bank of England Console's Office (1799)</h1><img class = 'img-icon' src='bank.jpeg'/> <p> In 1799, the British government commissioned Soane to redesign its National Bank's offices on Threadneedle street capulated his architectural career into the public's view: most notably, the bank's interior columns mimicked the pronaos of the Temple of Neptune. Unfortunately, the Bank has since been remodeled and no longer contains Soane's original work.</p></div>").openPopup();
+
+  hera.bindPopup("<div> <h1 class = 'building-name'>Temple of Hera</h1><img class = 'img-icon' src='hera.jpeg'/> <p> This temple's usage of Doric columns closely influenced the design of the British bank, along with Soane's visit to the Temple of Neptune. </p></div>").openPopup();
+  vesta.bindPopup("<div> <h1 class = 'building-name'>Temple of Vesta, Tivoli</h1><img class = 'img-icon' src='vesta.jpeg'/> <p> Located near Rome, John Soane frequented this small Roman Temple, producing several sketches whom he would reference during his time as a professor at the Royal Academy, along with his designs for the British bank. Similar, the Soane museum contains several replicas of this temple, indicating Soane's interest to this architectural feat. </p></div>").openPopup();
+  soane_travels = [[51.50853, -0.12574], [48.85657778, 2.351827778], [41.89305556, 12.48277778], [40.840141, 14.25226021], [40.750556, 14.489722], [40.42, 15.00555556], [40.673481, 14.77124977], [40.840141, 14.25226021], [40.42, 15.00555556], [40.5148399, 15.4948137], [40.673481, 14.77124977], [40.840141, 14.25226021], [41.10555556, 14.21388889], [41.21408, 13.57082], [41.29174, 13.24359], [41.41667, 12.91667], [41.68573, 12.77753], [41.728534, 12.658854], [41.89305556, 12.48277778], [40.840141, 14.25226021], [38.18333333, 15.55], [35.890556, 14.43953609], [38.18333333, 15.55], [40.840141, 14.25226021], [41.89305556, 12.48277778], [42.517799, 12.51640034], [43.4396423, 13.6065668], [43.61666667, 13.51666667], [44.504822, 11.34517956], [44.80147222, 10.328], [45.4654219, 9.1859243], [45.536591, 10.23204041], [45.43815833, 10.99374167], [45.1564168, 10.7913751], [45.54672, 11.5475], [45.40638889, 11.87777778], [45.43811, 12.31814957], [44.504822, 11.34517956], [43.77138889, 11.25416667], [41.89305556, 12.48277778], [42.3272312, 12.2387494], [43.31833333, 11.33138889], [43.77138889, 11.25416667], [44.504822, 11.34517956], [44.8381237, 11.619787], [45.40638889, 11.87777778], [45.54672, 11.5475], [45.43815833, 10.99374167], [45.1564168, 10.7913751], [44.80147222, 10.328], [45.4654219, 9.1859243], [45.18528056, 9.155], [44.40718611, 8.933983333], [45.4654219, 9.1859243], [45.810711, 9.08714962], [51.50722222, -0.1275]]
+  grey_style = {color: 'grey', weight: 5, opacity: 0.7, dashArray: '4,12,20,12', lineJoin: 'miter', lineCap: 'square'}
+  white_style = {color: 'white', weight: 5, opacity: 0.7, dashArray: '4,12,20,12', lineJoin: 'miter', lineCap: 'square'}
+  
+
+  
+  var travel_path = L.polyline(soane_travels, grey_style).addTo(map);
+  var vesta_to_bank = L.polyline([vesta_coords, bank_coords], white_style).addTo(map);
+  var hera_1 = L.polyline([hera_coords, cheslea_hospital_coords], white_style).addTo(map);
+  var hera_2 = L.polyline([hera_coords, bank_coords], white_style).addTo(map);
+  var hera_2 = L.polyline([hera_coords, church_coords], white_style).addTo(map);
+  //var valley_to_hopistal = L.polyline([cheslea_hospital_coords, valley_coords], white_style).addTo(map);
+  
+ 
+  // load a tile layer
+  const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		maxZoom: 19,
+    //minZoom: 9,
+		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+	}).addTo(map);
+
+  </script>
+</body>
+</html>

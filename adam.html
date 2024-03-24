@@ -1,0 +1,149 @@
+<html>
+<head>
+  <title>Robert Adam</title>
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"/>
+  <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+  <style>
+    /*#map{ width: 80vw; height: 100vh; }*/
+
+    * {
+  box-sizing: border-box;
+}
+
+.img-icon {
+  width: 300px;
+}
+
+/* Create two equal columns that floats next to each other */
+.column-left {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  height: 100vh; /* Should be removed. Only for demonstration */
+}
+
+.column-right {
+  float: left;
+  width: 80%;
+  padding: 10px;
+  height: 100vh; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.architect-name{
+  color:#ffffff;
+  font-size: 30px;
+}
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+}
+
+.portrait {
+  width:90%;
+}
+
+.text{
+  color: #ffffff;
+}
+
+.img-side {
+  height:100px;
+}
+.leaflet-layer,
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out,
+.leaflet-control-attribution {
+  filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+}
+
+
+  </style>
+</head>
+<body>
+
+<!--div id="map"></div> -->
+  <div class="row">
+    <div class="column-left" style="background-color:#242a3b;">
+      <h2 class="architect-name">Robert Adam</h2>
+      <img class = 'portrait' src="robert-adam.jpeg"/>
+      <p class = 'text'>Growing up in a family of Scottish and British architects, Robert Adam was no stranger to the then-vogue Palladian style. However, his travels and relationship with Italian printmaker Giovanni Piranesi show a shift towards a combination of both Palladian, and more ornate details in British household interiors.</p>
+      <h3 class="text">Legend:</h3>
+      <p class = 'text'>White Stars: Architectural Points. </p>
+     <p class = 'text'>White Dashed Line: Connections of Grand Tour and Adam's Work.</p>
+      <p class = 'text'>Grey Dashed Line: Adam's Route</p>
+      <a class = 'text' href = "grand-tour-architects.html">Back Home.</a> 
+    </div>
+    <div class="column-right" id="map" style="background-color:#242a3b;">
+    </div>
+  </div>
+  <script>
+
+  //function add_markers(){}
+  //add_markers()
+  // initialize the map
+  
+  var map = L.map('map').setView([48, 9], 5);
+
+
+  var LeafIcon = L.Icon.extend({
+    options: {
+        //shadowUrl: 'white-star-hi.png',
+        iconSize:     [20, 20],
+        //shadowSize:   [50, 64],
+        //iconAnchor:   [0, 0],
+        //shadowAnchor: [4, 62],
+        popupAnchor:  [0, 0]
+    }
+});
+
+  var starIcon = new LeafIcon({iconUrl: 'white-star-hi.png'})
+  L.icon = function (options) {
+    return new L.Icon(options);
+};
+
+kedleston_coords = [52.95934645517379, -1.5360991593420243];
+pultney_bridge_coords = [51.38319735906511, -2.3575447072968174];
+constantine_arch_coords = [41.890178694982474, 12.492995628388936];
+ponte_vecchio_coords = [44.37148012432354, 14.138856300501297];
+olympic_theatre_coords = [45.55024075531337, 11.549932622943908];
+ 
+  var keldeston = L.marker(kedleston_coords, {icon: starIcon}).addTo(map);
+  var pultney_bridge = L.marker(pultney_bridge_coords, {icon: starIcon}).addTo(map);
+  var const_arch = L.marker(constantine_arch_coords, {icon: starIcon}).addTo(map);
+  var ponte_vecchio = L.marker(ponte_vecchio_coords, {icon: starIcon}).addTo(map);
+  var olympic_theatre = L.marker(olympic_theatre_coords, {icon: starIcon}).addTo(map);
+
+  //constantine_arch
+  keldeston.bindPopup("<div> <h1 class = 'building-name'>Kedleston Hall (1779)</h1> <img class = 'img-side' src='kedleston-outside.jpeg'/><img class = 'img-side' src='kedleston.jpeg'/> <h3>Key Features:</h3> <p>Exterior utilized Corthinian pillars from ancient Greek temples & the Arch of Constatine, interiors represented the symmetric designs of Palladian villas, while are also decorated with Adam's unique intricate carvings.</p> </div>").openPopup();
+  pultney_bridge.bindPopup("<div> <h1 class = 'building-name'>Pultney Bridge (1774)</h1> <img class = 'img-icon' src='pultney.jpeg'/> <h3>Key Features:</h3> <p> Mimics arches of the Ponte Vecchio Bridges, along with details of Renassiance-style bridges found in Venice.</p></div>").openPopup();
+  const_arch.bindPopup("<div><h1 class = 'building-name'>Arch of Constantine</h1><img class = 'img-icon' src='arch.jpeg'/><p>Truimphal arch dedicated to Constantine the Great, with intricate depications of his victories in battle.</p></div>").openPopup();
+  ponte_vecchio.bindPopup("<div><h1 class = 'building-name'>Point Vecchio</h1><img class = 'img-icon' src='ponte.jpeg'/><p> Medival bridge containing arches, as well as commerce on top.</p></div>").openPopup();
+  olympic_theatre.bindPopup("<div><h1 class = 'building-name'>Teatro Olimpico Vicenza</h1><img class = 'img-icon' src='olimpico.jpeg'/><p>A destination frequented by John Adam (Robert Adam's brother), was a key Palladio-designed destination that the Adam brothers were critical of: notably, they found its interiors and floor-plans at times 'confusing' and impartical.</p></div>").openPopup();
+  adam_travels = [[55.9543, -3.20188999], [44.40718611, 8.933983333], [43.55, 10.31666667], [43.70853, 10.4036], [43.77138889, 11.25416667], [43.31833333, 11.33138889], [41.89305556, 12.48277778], [40.840141, 14.25226021], [40.817558, 14.07110977], [40.848611, 14.053611], [40.82758, 14.1394], [40.81139, 14.20172977], [41.07262, 14.33231], [40.80569, 14.34799], [40.81563, 14.33716], [41.89305556, 12.48277778], [42.3272312, 12.2387494], [42.517799, 12.51640034], [42.56666667, 12.65], [42.73333333, 12.73333333], [44.05755, 12.56528], [44.4183598, 12.2035294], [41.89305556, 12.48277778], [41.7188539, 13.6130491], [41.89305556, 12.48277778], [41.728534, 12.658854], [41.8091, 12.67942], [43.77138889, 11.25416667], [44.504822, 11.34517956], [45.40638889, 11.87777778], [45.43811, 12.31814957], [43.506969, 16.44207001], [45.43811, 12.31814957], [45.54672, 11.5475], [45.43815833, 10.99374167], [51.50853, -0.12574]]
+  grey_style = {color: 'grey', weight: 5, opacity: 0.7, dashArray: '4,12,20,12', lineJoin: 'miter', lineCap: 'square'}
+  white_style = {color: 'white', weight: 5, opacity: 0.7, dashArray: '4,12,20,12', lineJoin: 'miter', lineCap: 'square'}
+  
+  var travel_path = L.polyline(adam_travels, grey_style).addTo(map);
+
+  var kedle_to_arch = L.polyline([kedleston_coords, constantine_arch_coords], white_style).addTo(map);
+  var pultney_to_ponte = L.polyline([pultney_bridge_coords, ponte_vecchio_coords], white_style).addTo(map);
+
+  // load a tile layer
+  const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		maxZoom: 19,
+    //minZoom: 9,
+		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+	}).addTo(map);
+
+  </script>
+</body>
+</html>
